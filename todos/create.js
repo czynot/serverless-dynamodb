@@ -1,8 +1,9 @@
 'use strict';
 
 const uuid = require('uuid');
-const AWS = require('aws-sdk');
-const dynamoDb = new AWS.DynamoDb.DocumentClient();
+// const AWS = require('aws-sdk');
+var DynamoDB = require('aws-sdk/clients/dynamodb');
+const dynamoDb = new DynamoDB.DocumentClient();
 
 module.exports.create = (event, context, callback) => {
     const timestamp = new Date().getTime();
@@ -20,8 +21,8 @@ module.exports.create = (event, context, callback) => {
             id: uuid.v1(),
             text: data.text,
             checked: false,
-            createdAt: timeStamp,
-            updatedAt: timeStamp
+            createdAt: timestamp,
+            updatedAt: timestamp
         }
     }
 
@@ -34,7 +35,7 @@ module.exports.create = (event, context, callback) => {
 
         const response = {
             statusCode: 200,
-            body: JSON.stringify(results.Item)
+            body: JSON.stringify(result.Item)
         }
         callback(null, response);
     })

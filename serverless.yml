@@ -125,7 +125,7 @@ resources:
         AttributeDefinitions:
           -
             AttributeName: id
-            AttributeTyle: S
+            AttributeType: S
         KeySchema:
           -
             AttributeName: id
